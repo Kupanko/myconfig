@@ -2,7 +2,7 @@
 
 OUTPUT_FILE="/tmp/spotify_status.txt"
 
-playerctl metadata --follow --format '{{status}};{{artist}} - {{title}}' | while read -r line; do
+playerctl metadata -F -f -p=spotify '{{status}};{{artist}} - {{title}}' | while read -r line; do
     STATUS=$(echo "$line" | cut -d';' -f1)
     METADATA=$(echo "$line" | cut -d';' -f2-)
 
