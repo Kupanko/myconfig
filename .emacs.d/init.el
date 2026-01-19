@@ -3,34 +3,42 @@
 (load "~/.emacs.d/yka-lib.el")
 (load "~/.emacs.d/yka-keybinds.el")
 
-(setq inhibit-splash-screen 0)
+(setq inhibit-splash-screen t)
 (ido-mode 1)
 (ido-everywhere 1)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
+(menu-bar-mode 0)
 (show-paren-mode 1)
+(setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
 (column-number-mode 1)
-(setq display-line-numbers-type 'relative)
-(setq use-dialog-box 0)
-(setq redisplay-dont-pause 1)
+(setq use-dialog-box nil)
+(setq redisplay-dont-pause t)
 (setq ring-bell-function 'ignore)
 (setq frame-title-format "Buffer: %b")
-(setq auto-save-mode 0)
+(setq auto-save-default nil)
 (setq auto-save-interval 0)
-(setq-default indent-tabs-mode nil)
-(setq default-frame-alist '((height . 45)(width . 140)(left . 440)(top . 140)))
-
-(require 'ansi-color)
-(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
-
-(setq compilation-scroll-output t)
-
 (setq make-backup-files nil)
+(setq-default indent-tabs-mode nil)
+(setq compilation-scroll-output t)
 (global-whitespace-mode 1)
 (whitespace-toggle-options 's)
 
 (setq-default whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark))
+
+(require 'ansi-color)
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+
+(setq-default mode-line-format
+  '("%e"
+    "   File: %z%*%+   Buffer: %b (%l, %c)   Size: %I   Mode: " mode-name
+    ))
+
+(set-frame-font "IosevkaSS03" nil t)
+(set-fontset-font "fontset-default" 'han "Noto Sans JP")
+(set-fontset-font "fontset-default" 'kana "Noto Sans JP")
+(set-fontset-font "fontset-default" 'symbol "Noto Sans JP")
 
 (yka/require 'typescript-mode)
 
