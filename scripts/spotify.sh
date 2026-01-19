@@ -1,6 +1,8 @@
 #!/bin/bash
 
-OUTPUT_FILE="/tmp/spotify_status.txt"
+mkdir -p /tmp/i3status
+
+OUTPUT_FILE="/tmp/i3status/spotify.txt"
 
 playerctl --player="spotify" metadata --follow --format '{{playerName}};{{status}};{{artist}} - {{title}}' | while read -r line; do
     PLAYER=$(echo "$line" | cut -d';' -f1)
