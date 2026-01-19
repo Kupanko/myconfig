@@ -1,8 +1,9 @@
+;; Melpa Packager
 ;; (add-to-list 'package-archives
 ;;             '("melpa" . "https://melpa.org/packages/") t)
 
 (setq path "~/.emacs.d/")
-(setq compile-command "node ./")
+(setq compile-command "")
 
 (defun yka/lib ()
   "Open YKA Config File"
@@ -34,3 +35,6 @@
 
 (yka/require 'multiple-cursors)
 (yka/require 'gruber-darker-theme)
+(yka/require 'magit)
+
+(yka/require 'markdown-mode)
