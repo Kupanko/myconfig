@@ -1,7 +1,3 @@
-;; Melpa Packager
-;; (add-to-list 'package-archives
-;;             '("melpa" . "https://melpa.org/packages/") t)
-
 (setq path "~/.emacs.d/")
 (setq compile-command "")
 
@@ -17,10 +13,6 @@
   "Open Projects Folder"
   (interactive)
   (switch-to-buffer (find-file-noselect "~/")))
-(defun yka/kbd ()
-  "Open Keybinds File"
-  (interactive)
-  (switch-to-buffer (find-file-noselect (concat path "yka-keybinds.el"))))
 (defun yka/sudo ()
   "Open file with sudo"
   (interactive)
@@ -30,11 +22,9 @@
   "Install packages"
   (when (not (package-installed-p package))
     (package-refresh-contents)
-    (package-install package)
-    ))
+    (package-install package)))
 
-(yka/require 'multiple-cursors)
-(yka/require 'gruber-darker-theme)
-(yka/require 'magit)
-
-(yka/require 'markdown-mode)
+(add-hook 'dired-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "C-,") (quote dired-create-empty-file))
+             (local-set-key (kbd "C-.") (quote dired-create-directory))))
