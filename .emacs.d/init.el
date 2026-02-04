@@ -1,3 +1,5 @@
+;; Kupano Config 25/03/23 -> ~
+
 (setq custom-file "~/.emacs.d/custom.el")
 
 (package-initialize)
@@ -6,6 +8,7 @@
 
 (setq inhibit-splash-screen t)             ; hide start screen
 
+;; mb swap to ivy-mode or vertico-mode
 (ido-mode 1)                               ; enable ido mode
 (ido-everywhere 1)                         ; enable ido mode in all buffer
 
@@ -48,6 +51,9 @@
     "   File: %z%*%+   Buffer: %b (%l, %c)   Size: %I   Mode: " mode-name))
 
 (set-frame-font "IosevkaSS03" nil t)                        ; global font
+(set-fontset-font "fontset-default" 'han "Noto Sans JP")    ; わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'kana "Noto Sans JP")   ; わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'symbol "Noto Sans JP") ; わたし・ワタシ・私
 
 (yka/require 'gruber-darker-theme)
 (load-theme 'gruber-darker t)
@@ -81,5 +87,11 @@
 (global-set-key (kbd "C-x C-<") 'mc/skip-to-previous-like-this)
 
 (global-set-key (kbd "C-c w")   'whitespace-cleanup)
+(global-set-key (kbd "C-x j")   'replace-string)
+
+(add-hook 'dired-mode-hook
+          '(lambda ()
+             (local-set-key (kbd "C-,") (quote dired-create-empty-file))
+             (local-set-key (kbd "C-.") (quote dired-create-directory))))
 
 (load-file custom-file)
