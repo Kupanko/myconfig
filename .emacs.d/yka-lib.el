@@ -23,8 +23,3 @@
   (when (not (package-installed-p package))
     (package-refresh-contents)
     (package-install package)))
-
-(add-hook 'dired-mode-hook
-          '(lambda ()
-             (local-set-key (kbd "C-,") (quote dired-create-empty-file))
-             (local-set-key (kbd "C-.") (quote dired-create-directory))))
