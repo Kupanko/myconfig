@@ -81,7 +81,7 @@ bindsym XF86AudioNext exec --no-startup-id playerctl -p spotify next
 bindsym XF86AudioPlay exec --no-startup-id playerctl -p spotify play-pause
 # Screenshot
 bindsym Print exec --no-startup-id gnome-screenshot -i
-# Personal Files (remove, when publish on github)
+# Projects
 exec --no-startup-id ~/Projects/Bash/spotify.sh
 exec --no-startup-id ~/Projects/Bash/projects.sh
 # Launch picom
@@ -124,16 +124,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
     ###  WORKSPACE   ###
 ############################
 # Set names for workspace
-    set $ws1 "1:一"
-    set $ws2 "2:二"
-    set $ws3 "3:三"
-    set $ws4 "4:四"
-    set $ws5 "5:五"
-    set $ws6 "6:六"
-    set $ws7 "7:七"
-    set $ws8 "8:八"
-    set $ws9 "9:九"
-    set $ws10 "10:十"
+    set $ws1 "1"
+    set $ws2 "2"
+    set $ws3 "3"
+    set $ws4 "4"
+    set $ws5 "5"
+    set $ws6 "6"
+    set $ws7 "7"
+    set $ws8 "8"
+    set $ws9 "9"
+    set $ws10 "10"
 # Open workspace by number
     bindsym $mod+1 workspace number $ws1
     bindsym $mod+2 workspace number $ws2
@@ -159,7 +159,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Resize Mode
 
 set $mode_resize <span font='Material Icons' rise='-2000'>pinch</span> <b>Resize</b>
-
 
 mode --pango_markup "$mode_resize" {
     # Resize Width (shrink)
@@ -199,20 +198,20 @@ bar {
     mode dock
     modifier none
     status_command i3status -c ~/.config/i3/status-main.conf
-    font pango: Ubuntu Mono 10
-    separator_symbol "|"
-    height 24
+    font pango: Ubuntu Mono 9
+    separator_symbol "⋮"
+    height 20
     tray_padding 4
-    workspace_min_width 24
+    workspace_min_width 16
     strip_workspace_numbers yes
 
     colors {
-        background #2d2d2d
+        background #000000
         statusline #ffffff
-        separator  #464646
+        separator  #2d2d2d
         #                  #border #bg     #fg
-        focused_workspace  #ffb748 #ffb748 #000000
-        inactive_workspace #464646 #464646 #cdcdcd
+        focused_workspace  #000000 #000000 #ffb748
+        inactive_workspace #000000 #000000 #cdcdcd
         urgent_workspace   #464646 #464646 #cdcdcd
         binding_mode       #81bcd3 #81bcd3 #000000
     }
