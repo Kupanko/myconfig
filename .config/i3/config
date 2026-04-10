@@ -76,25 +76,22 @@ tiling_drag modifier titlebar
 # Disable mouse focus
 focus_follows_mouse no
 # Mouse Key - Next song
-bindsym XF86AudioNext exec --no-startup-id playerctl -p spotify next
+bindsym XF86AudioNext exec --no-startup-id playerctl --ignore-player=chromium next
 # Mouse Key - Play/Pause song
-bindsym XF86AudioPlay exec --no-startup-id playerctl -p spotify play-pause
+bindsym XF86AudioPlay exec --no-startup-id playerctl --ignore-player=chromium play-pause
 # Screenshot
-bindsym Print exec --no-startup-id gnome-screenshot -i
-# Projects
-exec --no-startup-id ~/Projects/Bash/spotify.sh
+# bindsym Print exec --no-startup-id gnome-screenshot -i
+  bindsym Print exec --no-startup-id ~/Projects/Bash/yany_screenshot.sh
+# Personal Files (replace with systemctl)
 exec --no-startup-id ~/Projects/Bash/projects.sh
 # Launch picom
-exec --no-startup-id picom -b
+exec_always --no-startup-id picom -b --config ~/.config/picom.conf
 # Launch udiskie
 exec --no-startup-id udiskie -t -c ~/.config/udiskie/config.yml
 
 # Launch ibus-daemon
 exec --no-startup-id fcitx5 -d
 bindsym $mod+Ctrl+j exec --no-startup-id fcitx5 -d
-# exec --no-startup-id ibus-daemon -drx
-# exec --no-startup-id "sleep 2 && ibus engine anthy"
-# bindsym $mod+Ctrl+j exec "ibus engine anthy"
 
 # Open Rofi ($mod+d)
 bindcode $mod + 40 exec --no-startup-id rofi -show drun -icon-theme "Papirus" -show-icons
