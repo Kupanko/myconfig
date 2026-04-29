@@ -1,4 +1,4 @@
-;; Kupano Config 25/03/23 -> ~
+;; Kupano Config 25/03/23 - 26/~/~
 
 (setq custom-file "~/.emacs.d/custom.el")
 
@@ -7,10 +7,6 @@
 (load "~/.emacs.d/yka-lib.el")             ; load yka/lib
 
 (setq inhibit-splash-screen t)             ; hide start screen
-
-;; mb swap to ivy-mode or vertico-mode
-(ido-mode 1)                               ; enable ido mode
-(ido-everywhere 1)                         ; enable ido mode in all buffer
 
 (scroll-bar-mode 0)                        ; disable scrollbar
 (tool-bar-mode 0)                          ; disable tool bar
@@ -38,10 +34,38 @@
 (global-whitespace-mode 1)                 ; highlights for spaces
 (whitespace-toggle-options 's)             ; specify highlighted elements
 
-;; (yka/require 'company)
-;; (global-company-mode)
-
 (setq-default whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark))
+
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  :config
+  (setq vertico-cycle t)
+  (setq vertico-resize nil))
+
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil) ;; Disable defaults, use our settings
+  (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
+
+(use-package marginalia
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
+(yka/require 'company)
+(global-company-mode)
+
+(setq-default company-minimum-prefix-length 2)
+(setq-default company-tooltip-limit 12)
+(setq-default company-idle-delay 0.3)
+(setq-default company-selection-wrap-around t)
+(setq-default company-etags-use-main-table-list t)
+(setq company-backends '((company-capf company-dabbrev-code) company-etags))
 
 (require 'ansi-color) ; colors for console
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
@@ -51,9 +75,9 @@
     "   File: %z%*%+   Buffer: %b (%l, %c)   Size: %I   Mode: " mode-name))
 
 (set-frame-font "IosevkaSS03" nil t)                        ; global font
-(set-fontset-font "fontset-default" 'han "Noto Sans JP")    ; わたし・ワタシ・私
-(set-fontset-font "fontset-default" 'kana "Noto Sans JP")   ; わたし・ワタシ・私
-(set-fontset-font "fontset-default" 'symbol "Noto Sans JP") ; わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'han "Noto Sans JP")    ; for japanese: わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'kana "Noto Sans JP")   ; for japanese: わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'symbol "Noto Sans JP") ; for japanese: わたし・ワタシ・私
 
 (yka/require 'gruber-darker-theme)
 (load-theme 'gruber-darker t)
