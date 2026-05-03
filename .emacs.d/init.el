@@ -4,37 +4,40 @@
 
 (package-initialize)
 
-(load "~/.emacs.d/yka-lib.el")             ; load yka/lib
+(load "~/.emacs.d/yka-lib.el")
 
-(setq inhibit-splash-screen t)             ; hide start screen
+(setq inhibit-splash-screen t)
 
-(scroll-bar-mode 0)                        ; disable scrollbar
-(tool-bar-mode 0)                          ; disable tool bar
-(menu-bar-mode 0)                          ; disable menu bar
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(show-paren-mode 1)
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+(setq column-number-mode t)
 
-(show-paren-mode 1)                        ; enable highlighting parentheses {},[],()
-(setq display-line-numbers-type 'relative) ; relative line numbers
-(global-display-line-numbers-mode 1)       ; display line numbers
-(column-number-mode 1)                     ; column number in mode line
+(setq use-dialog-box nil)
+(setq redisplay-dont-pause t)
+(setq ring-bell-function 'ignore)
+(setq frame-title-format "Buffer: %b")
 
-(setq use-dialog-box nil)                  ; minibuffer instead of GUI dialogs
-(setq redisplay-dont-pause t)              ; smooth scrolling
-(setq ring-bell-function 'ignore)          ; disable bell/beep
-(setq frame-title-format "Buffer: %b")     ; set frame title
+(setq auto-save-default t)
+(setq auto-save-interval 300)
+(setq make-backup-files nil)
+(setq tramp-auto-save-directory "/tmp")
 
-(setq auto-save-default nil)               ; disable auto-saving
-(setq auto-save-interval 0)                ; never auto-save
-(setq make-backup-files nil)               ; stop creating ~ files
-(setq tramp-auto-save-directory "/tmp")    ; auto-save for tramp mode
+(setq compilation-scroll-output t)
 
-(setq compilation-scroll-output t)         ; autoscroll for compilation
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+(global-whitespace-mode t)
+(whitespace-toggle-options 's)
 
-(setq-default tab-width 4)                 ; tab size - 4 spaces
-(setq-default indent-tabs-mode nil)        ; spaces instead of tabs
-(global-whitespace-mode 1)                 ; highlights for spaces
-(whitespace-toggle-options 's)             ; specify highlighted elements
-
-(setq-default whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark))
+(setq-default whitespace-style '(
+  face tabs spaces trailing
+  space-before-tab newline
+  indentation empty space-after-tab
+  space-mark tab-mark))
 
 (use-package vertico
   :ensure t
@@ -44,14 +47,25 @@
   (setq vertico-cycle t)
   (setq vertico-resize nil))
 
+(use-package vertico-directory
+  :after vertico
+  :ensure nil
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
 (use-package orderless
+  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion))))
-  (completion-category-defaults nil) ;; Disable defaults, use our settings
-  (completion-pcm-leading-wildcard t)) ;; Emacs 31: partial-completion behaves like substring
+  (completion-category-defaults nil)
+  (completion-pcm-leading-wildcard t))
 
 (use-package marginalia
+  :ensure t
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
   :init
@@ -67,17 +81,17 @@
 (setq-default company-etags-use-main-table-list t)
 (setq company-backends '((company-capf company-dabbrev-code) company-etags))
 
-(require 'ansi-color) ; colors for console
+(require 'ansi-color)
 (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
 
 (setq-default mode-line-format
   '("%e"
     "   File: %z%*%+   Buffer: %b (%l, %c)   Size: %I   Mode: " mode-name))
 
-(set-frame-font "IosevkaSS03" nil t)                        ; global font
-(set-fontset-font "fontset-default" 'han "Noto Sans JP")    ; for japanese: わたし・ワタシ・私
-(set-fontset-font "fontset-default" 'kana "Noto Sans JP")   ; for japanese: わたし・ワタシ・私
-(set-fontset-font "fontset-default" 'symbol "Noto Sans JP") ; for japanese: わたし・ワタシ・私
+(set-frame-font "IosevkaSS03" nil t)                        ; Text - Текст
+(set-fontset-font "fontset-default" 'han "Noto Sans JP")    ; わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'kana "Noto Sans JP")   ; わたし・ワタシ・私
+(set-fontset-font "fontset-default" 'symbol "Noto Sans JP") ; わたし・ワタシ・私
 
 (yka/require 'gruber-darker-theme)
 (load-theme 'gruber-darker t)
