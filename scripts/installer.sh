@@ -240,6 +240,7 @@ detect_gpu_vendor() {
 
 install_i3() {
     sudo sed -i '/^#[[:space:]]*\[multilib\]$/{s/^#//; n; s/^#//}' /etc/pacman.conf
+    sudo pacman -Sy
     sudo pacman -S --noconfirm xorg-server xorg-xinit xorg-setxkbmap xorg-xrandr xorg-xprop xorg-xinput xorg-xwd xdotool
     sudo pacman -S --noconfirm i3-wm i3status rofi
     sudo pacman -S --noconfirm lshw picom udisks2 udiskie unrar unzip ntfs-3g usbutils dosfstools cifs-utils cryptsetup polkit feh alacritty openssh git wget pavucontrol pipewire pipewire-pulse pipewire-alsa ly xdg-user-dirs playerctl ufw man-db man-pages qalculate-gtk imagemagick xclip cups cups-browsed system-config-printer emacs papers
@@ -257,7 +258,7 @@ install_i3() {
         echo "Please select one or more options (separated by spaces):"
         echo "1) Firefox"
         echo "2) Chromium"
-        echo "3) File manager: thunar. Document Viewer: papers"
+        echo "3) File manager: thunar."
         echo "4) Steam, Spotify"
         echo "5) Media player: VLC"
         echo "6) Network tools: wireshark-qt traceroute nmap"
