@@ -88,10 +88,12 @@
   '("%e"
     "   File: %z%*%+   Buffer: %b (%l, %c)   Size: %I   Mode: " mode-name))
 
-; (set-frame-font "IosevkaSS03" nil t)                        ; Text - Текст
-; (set-fontset-font "fontset-default" 'han "Noto Sans JP")    ; わたし・ワタシ・私
-; (set-fontset-font "fontset-default" 'kana "Noto Sans JP")   ; わたし・ワタシ・私
-; (set-fontset-font "fontset-default" 'symbol "Noto Sans JP") ; わたし・ワタシ・私
+(setq dired-listing-switches "-laGh1v --time-style=long-iso")
+
+(ignore-errors (set-frame-font "IosevkaSS03" nil t))                        ; Text - Текст
+(ignore-errors (set-fontset-font "fontset-default" 'han "Noto Sans JP"))    ; わたし・ワタシ・私
+(ignore-errors (set-fontset-font "fontset-default" 'kana "Noto Sans JP"))   ; わたし・ワタシ・私
+(ignore-errors (set-fontset-font "fontset-default" 'symbol "Noto Sans JP")) ; わたし・ワタシ・私
 
 (yka/require 'gruber-darker-theme)
 (load-theme 'gruber-darker t)
