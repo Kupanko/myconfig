@@ -107,6 +107,10 @@
   (add-to-list 'auto-mode-alist
                (cons (concat "\\" ext "\\'") 'typescript-mode)))
 
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+(global-set-key (kbd "C-c <tab>") 'hs-toggle-hiding)
+
 (global-set-key (kbd "<f5>")    'compile)
 (global-set-key (kbd "<f4>")    'kill-compilation)
 (global-set-key (kbd "<f7>")    'shell)
