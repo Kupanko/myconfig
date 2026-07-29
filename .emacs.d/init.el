@@ -110,6 +110,8 @@
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
 (global-set-key (kbd "C-c <tab>") 'hs-toggle-hiding)
+(global-set-key (kbd "C-c h") 'hs-hide-all)
+(global-set-key (kbd "C-c s") 'hs-show-all)
 
 (global-set-key (kbd "<f5>")    'compile)
 (global-set-key (kbd "<f4>")    'kill-compilation)
